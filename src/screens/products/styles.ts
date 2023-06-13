@@ -8,14 +8,11 @@ const createStyles = () =>
       padding: 10,
     },
 
-    productCard: {
+    emptyContainer: {
       display: 'flex',
-      width: '100%',
-      height: 80,
-      borderRadius: 12,
-      alignSelf: 'center',
-      backgroundColor: '#78CAD2',
-      marginVertical: 5,
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });
 

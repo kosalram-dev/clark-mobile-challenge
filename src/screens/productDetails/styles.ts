@@ -1,26 +1,36 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+import {TPalette} from '../../utils/types';
 
-const createStyles = () =>
+const {width} = Dimensions.get('screen');
+
+const createStyles = (colors: TPalette) =>
   StyleSheet.create({
     container: {
       display: 'flex',
       flex: 1,
-      backgroundColor: 'white',
+      backgroundColor: colors.white,
     },
 
     imageContainer: {
       flex: 1,
       display: 'flex',
-      backgroundColor: 'white',
+      backgroundColor: colors.white,
       marginHorizontal: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    image: {
+      width: '100%',
+      height: width / 1.5,
+      resizeMode: 'contain',
     },
     detailsContainer: {
       padding: 12,
       display: 'flex',
       borderTopLeftRadius: 16,
       borderTopRightRadius: 16,
-      backgroundColor: 'white',
-      shadowColor: '#000',
+      backgroundColor: colors.white,
+      shadowColor: colors.black,
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.5,
       shadowRadius: 2,
@@ -62,7 +72,13 @@ const createStyles = () =>
     favourite: {
       position: 'absolute',
       right: 10,
-      top: 16,
+      top: 5,
+    },
+    titleContainer: {
+      flexGrow: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
   });
 

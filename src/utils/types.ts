@@ -25,3 +25,10 @@ export type TRating = {
   rate: number;
   count: number;
 };
+
+export type TPalette = {
+  brandTint: string;
+  black: string;
+  white: string;
+  danger: string;
+};

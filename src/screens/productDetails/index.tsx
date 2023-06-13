@@ -1,56 +1,57 @@
-import React from 'react';
-import {View, Text, ImageBackground} from 'react-native';
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 
 import createStyles from './styles';
-import {RootStackParamList} from '../../utils/types';
 import {Rating, Button, Icon} from '../../components';
+import useTheme from '../../hooks/useTheme';
+import {TProduct} from '../../utils/types';
 
-type ProductDetailsRouteProp = RouteProp<RootStackParamList, 'ProductDetails'>;
-type ProductDetailsNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'ProductDetails'
->;
+const ProductDetails = () => {
+  const {
+    params: {item},
+  } = useRoute();
+  const {colors} = useTheme();
+  const styles = createStyles(colors);
+  const [favourite, setFavourite] = useState(false);
 
-type ProductDetailsProps = {
-  route: ProductDetailsRouteProp;
-  navigation: ProductDetailsNavigationProp;
-};
+  const product: TProduct = item;
 
-const product = {
-  id: 6,
-  title: 'Solid Gold Petite Micropave ',
-  price: 168,
-  description:
-    'Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.',
-  category: 'jewelery',
-  image: 'https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg',
-  rating: {
-    rate: 4.9,
-    count: 70,
-  },
-};
-
-const ProductDetails: React.FC<ProductDetailsProps> = (
-  props: ProductDetailsProps,
-) => {
-  const styles = createStyles();
+  const handleFavourites = () => {
+    setFavourite(!favourite);
+  };
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={{uri: product.image}}
-        style={styles.imageContainer}
-        resizeMode="contain">
-        <View style={styles.favourite}>
-          <Icon name="hearto" type="AntDesign" size={20} color="black" />
-        </View>
-      </ImageBackground>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{uri: product.image}}
+          style={styles.image}
+          resizeMode="contain"
+        />
+      </View>
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{product.title}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{product.title}</Text>
+          <TouchableOpacity onPress={handleFavourites}>
+            {favourite ? (
+              <Icon
+                name="heart"
+                type="AntDesign"
+                size={20}
+                color={colors.danger}
+              />
+            ) : (
+              <Icon
+                name="hearto"
+                type="AntDesign"
+                size={20}
+                color={colors.black}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
         <Rating rate={product.rating.rate} count={product.rating.count} />
-
         <View style={styles.content}>
           <Text style={styles.label}>Description</Text>
           <Text style={styles.description}>{product.description}</Text>

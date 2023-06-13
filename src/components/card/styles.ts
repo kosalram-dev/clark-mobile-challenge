@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
+import {TPalette} from '../../utils/types';
 
-const createStyles = () =>
+const createStyles = (colors: TPalette) =>
   StyleSheet.create({
     container: {
       display: 'flex',
@@ -9,10 +10,10 @@ const createStyles = () =>
       minHeight: 120,
       borderRadius: 8,
       alignSelf: 'center',
-      backgroundColor: 'white',
+      backgroundColor: colors.white,
       marginVertical: 5,
       flexDirection: 'row',
-      shadowColor: '#000',
+      shadowColor: colors.black,
       shadowOpacity: 0.2,
       shadowOffset: {width: 0, height: 2},
       shadowRadius: 4,
@@ -23,7 +24,7 @@ const createStyles = () =>
       height: 100,
       borderTopLeftRadius: 8,
       borderBottomLeftRadius: 8,
-      backgroundColor: 'white',
+      backgroundColor: colors.white,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',

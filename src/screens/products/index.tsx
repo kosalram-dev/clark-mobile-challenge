@@ -1,21 +1,53 @@
-import React from 'react';
-import {View, FlatList} from 'react-native';
+import React, {useState} from 'react';
+import {View, FlatList, Text} from 'react-native';
 
+import {Card, Input} from '../../components';
 import useProducts from '../../api/useProducts';
 import createStyles from './styles';
-import Card from '../../components/card';
 import {TProduct} from '../../utils/types';
+import useDebounce from '../../hooks/useDebounce';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 
 const Products: React.FC = () => {
-  const {data: products} = useProducts();
+  const navigation = useNavigation();
   const styles = createStyles();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  const {data: products} = useProducts({searchTerm: debouncedSearchTerm});
+
+  const onProductTap = (item: TProduct) => {
+    navigation.dispatch(
+      CommonActions.navigate('ProductDetails', {
+        item,
+      }),
+    );
+  };
 
   const _renderProductTile = ({item}: {item: TProduct}) => {
-    return <Card item={item} />;
+    return <Card item={item} onPress={() => onProductTap(item)} />;
+  };
+
+  const _renderListEmptyComponent = () => {
+    return (
+      <View style={styles.emptyContainer}>
+        <Text>No Products Found</Text>
+      </View>
+    );
+  };
+
+  const handleSearch = (text: string) => {
+    setSearchTerm(text);
   };
 
   return (
     <View style={styles.container}>
+      <Input
+        value={searchTerm}
+        onChangeText={handleSearch}
+        placeholder="Search Product..."
+      />
       <FlatList
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
@@ -23,6 +55,7 @@ const Products: React.FC = () => {
         data={products}
         renderItem={_renderProductTile}
         keyExtractor={item => `product_${item.id}`}
+        ListEmptyComponent={_renderListEmptyComponent()}
       />
     </View>
   );

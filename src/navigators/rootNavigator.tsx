@@ -8,9 +8,9 @@ const Stack = createStackNavigator();
 const RootNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="ProductDetails"
+      initialRouteName="Products"
       screenOptions={{
-        headerShown: false,
+        headerBackTitleVisible: false,
       }}>
       <Stack.Screen name="Products" component={Products} />
       <Stack.Screen name="ProductDetails" component={ProductDetails} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+
 import createStyles from './styles';
 import Icon from '../icon';
 import {TRating} from '../../utils/types';
