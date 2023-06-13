@@ -1,18 +1,19 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
-import Home from '../screens/home';
+import {Products, ProductDetails} from '../screens';
 
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="ProductDetails"
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Products" component={Products} />
+      <Stack.Screen name="ProductDetails" component={ProductDetails} />
     </Stack.Navigator>
   );
 };
