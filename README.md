@@ -2,10 +2,10 @@
 
 ## _Set UP_
 
-#### 1. Install React Native Community CLI
+#### 1. Install React Native Community CLI and JSON Server
 
 ```sh
- npm install -g @react-native-community/cli
+ npm install -g @react-native-community/cli json-server
 ```
 
 #### 2. Clone the repository
@@ -24,10 +24,10 @@
  yarn install
 ```
 
-#### 6. Metro Bundler
+#### 6. Start the Metro Bundler & Server
 
 ```sh
- yarn start --reset-cache
+ yarn run dev
 ```
 
 #### 6. Run in Android (\* make sure the android emulator is available)

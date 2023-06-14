@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, FlatList, Text} from 'react-native';
+import {View, FlatList, Text, RefreshControl} from 'react-native';
 
 import {Card, Input} from '../../components';
 import useProducts from '../../api/useProducts';
@@ -15,7 +15,13 @@ const Products: React.FC = () => {
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const {data: products} = useProducts({searchTerm: debouncedSearchTerm});
+  const {
+    data: products,
+    loading,
+    retry,
+  } = useProducts({
+    searchTerm: debouncedSearchTerm,
+  });
 
   const onProductTap = (item: TProduct) => {
     navigation.dispatch(
@@ -23,6 +29,10 @@ const Products: React.FC = () => {
         item,
       }),
     );
+  };
+
+  const handleRefresh = () => {
+    retry();
   };
 
   const _renderProductTile = ({item}: {item: TProduct}) => {
@@ -56,6 +66,9 @@ const Products: React.FC = () => {
         renderItem={_renderProductTile}
         keyExtractor={item => `product_${item.id}`}
         ListEmptyComponent={_renderListEmptyComponent()}
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
+        }
       />
     </View>
   );
