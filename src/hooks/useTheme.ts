@@ -7,6 +7,7 @@ const darkTheme: TPalette = {
   black: '#000',
   white: '#FFF',
   danger: '#DC362E',
+  paperBackground: 'rgba(255, 255, 255, 0.75)',
 };
 
 const lightTheme: TPalette = {
@@ -15,6 +16,7 @@ const lightTheme: TPalette = {
   black: '#000',
   white: '#FFF',
   danger: '#DC362E',
+  paperBackground: 'rgba(255, 255, 255, 0.75)',
 };
 
 const useTheme = (): {colors: TPalette} => {

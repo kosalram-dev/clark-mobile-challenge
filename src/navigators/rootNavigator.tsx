@@ -1,19 +1,27 @@
-import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
-import {Products, ProductDetails} from '../screens';
+import {createStackNavigator} from '@react-navigation/stack';
+
+import {Splash, ProductDetails} from '../screens';
+import {ROUTES} from '../utils/constants';
+import TabNavigator from './tabNavigator';
 
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Products"
+      initialRouteName={ROUTES.SPLASH}
       screenOptions={{
-        headerBackTitleVisible: false,
+        headerShown: false,
       }}>
-      <Stack.Screen name="Products" component={Products} />
-      <Stack.Screen name="ProductDetails" component={ProductDetails} />
+      <Stack.Screen name={ROUTES.SPLASH} component={Splash} />
+      <Stack.Screen name={ROUTES.TABS} component={TabNavigator} />
+      <Stack.Screen
+        name={ROUTES.PRODUCT_DETAILS}
+        component={ProductDetails}
+        options={{headerShown: true, headerBackTitleVisible: false}}
+      />
     </Stack.Navigator>
   );
 };
