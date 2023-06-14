@@ -12,7 +12,10 @@ const Card = React.memo(
     const styles = createStyles(colors);
 
     return (
-      <TouchableOpacity style={styles.container} onPress={onPress}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={onPress}
+        testID="card-component">
         <View style={styles.imageContainer}>
           <Image source={{uri: item.image}} style={styles.image} />
         </View>

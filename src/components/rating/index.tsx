@@ -15,9 +15,17 @@ const Rating = React.memo(({rate, count}: TRating) => {
     <View style={styles.container}>
       <View style={styles.star}>
         {[...Array(filledStars)].map((_, index) => (
-          <Icon key={`star_${index}`} name="star" type="AntDesign" size={16} />
+          <Icon
+            key={`star_${index}`}
+            name="star"
+            type="AntDesign"
+            size={16}
+            testID={'filled-star'}
+          />
         ))}
-        {hasHalfStar && <Icon name="staro" type="AntDesign" size={16} />}
+        {hasHalfStar && (
+          <Icon name="staro" type="AntDesign" size={16} testID={'half-star'} />
+        )}
       </View>
       <Text style={styles.reviewCount}>{`(${count} Reviews)`}</Text>
     </View>

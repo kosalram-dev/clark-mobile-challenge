@@ -24,7 +24,13 @@ const Button = ({title, onPress, icon}: TButtonProps) => {
       style={styles.button}
       activeOpacity={0.7}>
       {icon && (
-        <Icon name={icon.name} type={icon.type} size={20} color="white" />
+        <Icon
+          name={icon.name}
+          type={icon.type}
+          size={20}
+          color="white"
+          testID={`icon-component-${icon.name}`}
+        />
       )}
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>

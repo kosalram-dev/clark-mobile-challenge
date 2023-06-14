@@ -1,16 +1,20 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 
 import createStyles from './styles';
 import {Rating, Button, Icon} from '../../components';
 import useTheme from '../../hooks/useTheme';
 import {TProduct} from '../../utils/types';
 
+type RouteParams = {
+  item: TProduct;
+};
+
 const ProductDetails = () => {
-  const {
-    params: {item},
-  } = useRoute();
+  const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
+  const {item} = route.params;
+
   const {colors} = useTheme();
   const styles = createStyles(colors);
   const [favourite, setFavourite] = useState(false);

@@ -15,7 +15,14 @@ import Octicons from 'react-native-vector-icons/Octicons';
 
 import {TIcon} from '../../utils/types';
 
-const Icon = ({name, size = 30, color = '#FFEE1A', type, style}: TIcon) => {
+const Icon = ({
+  name,
+  size = 30,
+  color = '#FFEE1A',
+  type,
+  style,
+  testID,
+}: TIcon) => {
   const getIconsByType = () => {
     switch (type) {
       case 'AntDesign':
@@ -59,7 +66,7 @@ const Icon = ({name, size = 30, color = '#FFEE1A', type, style}: TIcon) => {
         return <></>;
     }
   };
-  return <View>{getIconsByType()}</View>;
+  return <View testID={testID}>{getIconsByType()}</View>;
 };
 
 export default Icon;

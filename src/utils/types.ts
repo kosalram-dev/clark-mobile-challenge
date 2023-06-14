@@ -9,6 +9,7 @@ export type TIcon = {
   size?: number;
   color?: string;
   style?: Object;
+  testID?: string;
 };
 
 export type TProduct = {
